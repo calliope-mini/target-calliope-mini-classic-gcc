@@ -5,19 +5,19 @@ if(TARGET_NORDIC_NRF51822_16K_GCC_TOOLCHAIN_INCLUDED)
 endif()
 set(TARGET_NORDIC_NRF51822_16K_GCC_TOOLCHAIN_INCLUDED 1)
 
-if(NOT YOTTA_CFG_NRF51822_RAM_SIZE)
-    message(WARNING "No definition of YOTTA_CFG_NRF51822_RAM_SIZE found, building image for default 16K target.")
-    set(YOTTA_CFG_NRF51822_RAM_SIZE "16K")
+if(NOT YOTTA_CFG_RAM_SIZE)
+    message(WARNING "No definition of YOTTA_CFG_RAM_SIZE found, building image for default 16K target.")
+    set(YOTTA_CFG_RAM_SIZE "16K")
 else()
     # Ensure that the string is uppercase to build the macro definitions correctly
-    string(TOUPPER "${YOTTA_CFG_NRF51822_RAM_SIZE}" YOTTA_CFG_NRF51822_RAM_SIZE)
-    if(YOTTA_CFG_NRF51822_RAM_SIZE STREQUAL "16K")
+    string(TOUPPER "${YOTTA_CFG_RAM_SIZE}" YOTTA_CFG_RAM_SIZE)
+    if(YOTTA_CFG_RAM_SIZE STREQUAL "16K")
 
-    elseif(YOTTA_CFG_NRF51822_RAM_SIZE STREQUAL "32K")
+    elseif(YOTTA_CFG_RAM_SIZE STREQUAL "32K")
      
     else()
         # Fail if the RAM size is not supported
-        message(FATAL_ERROR "Cannot build image for target with RAM size '${YOTTA_CFG_NRF51822_RAM_SIZE}'. Please modify your yotta config to set YOTTA_CFG_NRF51822_RAM_SIZE a supported option.\nSupported RAM sizes: '16K' (default), '32K'.")
+        message(FATAL_ERROR "Cannot build image for target with RAM size '${YOTTA_CFG_RAM_SIZE}'. Please modify your yotta config to set YOTTA_CFG_RAM_SIZE a supported option.\nSupported RAM sizes: '16K' (default), '32K'.")
     endif()
 endif()
 
@@ -35,7 +35,7 @@ set(CMAKE_C_FLAGS_INIT             "${CMAKE_C_FLAGS_INIT} ${_CPU_COMPILATION_OPT
 set(CMAKE_ASM_FLAGS_INIT           "${CMAKE_ASM_FLAGS_INIT} ${_CPU_COMPILATION_OPTIONS}")
 set(CMAKE_CXX_FLAGS_INIT           "${CMAKE_CXX_FLAGS_INIT} ${_CPU_COMPILATION_OPTIONS} -std=c++11 -fwrapv")
 set(CMAKE_MODULE_LINKER_FLAGS_INIT "${CMAKE_MODULE_LINKER_FLAGS_INIT} -mcpu=cortex-m0 -mthumb")
-set(CMAKE_EXE_LINKER_FLAGS_INIT    "${CMAKE_EXE_LINKER_FLAGS_INIT} -mcpu=cortex-m0 -mthumb -T\"${CMAKE_CURRENT_LIST_DIR}/../ld/NRF51822_${YOTTA_CFG_NRF51822_RAM_SIZE}.ld\"")
+set(CMAKE_EXE_LINKER_FLAGS_INIT    "${CMAKE_EXE_LINKER_FLAGS_INIT} -mcpu=cortex-m0 -mthumb -T\"${CMAKE_CURRENT_LIST_DIR}/../ld/NRF51822_${YOTTA_CFG_RAM_SIZE}.ld\"")
 
 # used by the apply_target_rules function below:
 set(NRF51822_SOFTDEVICE_HEX_FILE "${CMAKE_CURRENT_LIST_DIR}/../softdevice/s110_nrf51822_8.0.0_softdevice.hex")
