@@ -1,7 +1,7 @@
 {
-  "name": "calliope-mini-classic-gcc",
+  "name": "calliope-mini-classic-gcc-nosd",
   "version": "1.2.0",
-  "description": "mbed-os 2 build target for the Calliope mini, using the gcc toolchain.",
+  "description": "mbed-os 2 build target for the Calliope mini, using the gcc toolchain, without Softdevice.",
   "licenses": [
     {
       "url": "https://spdx.org/licenses/Apache-2.0",
